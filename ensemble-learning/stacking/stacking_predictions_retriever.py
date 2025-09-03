@@ -211,11 +211,12 @@ class StackingPredictionsRetriever:
         estimators_skipped = []
 
         for estimator in self.estimators:
-            estimator_name = f"{estimator.name} ({estimator.get_hash_value()})"
+            estimator_hash_value = estimator.get_hash_value()
+            estimator_name = f"{estimator.name} ({estimator_hash_value})"
 
             # skip retrieving predictions for estimator if non-stale predictions are already available
-            train_preds_available = any(estimator.get_hash_value() in col_name for col_name in curr_train_preds.columns)
-            test_preds_available = any(estimator.get_hash_value() in col_name for col_name in curr_test_preds.columns)
+            train_preds_available = any(estimator_hash_value in col_name for col_name in curr_train_preds.columns)
+            test_preds_available = any(estimator_hash_value in col_name for col_name in curr_test_preds.columns)
             if train_preds_available and test_preds_available:
                 estimators_skipped += [estimator_name]
                 continue
