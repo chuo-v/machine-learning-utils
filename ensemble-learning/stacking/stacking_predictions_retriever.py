@@ -14,6 +14,10 @@ class StackingEstimator:
     modified, the `StackingPredictionsRetriever` class can determine the predictions of estimators
     that are non-stale and available (if any) by using the `get_hash` method of the `StackingEstimator`
     class to determine the relevance and staleness of any saved predictions.
+
+    Proper usage of this class requires one important condition to be satisfied: the predictions made
+    using the estimator are determinstic, i.e. they are exactly the same everytime the estimator is
+    run with the same inputs (`name`, `params_dict`, `feature_names`, `get_predictions`).
     """
     name = ""
     params_dict = {}
@@ -94,6 +98,10 @@ class StackingPredictionsRetriever:
     an estimator. The implementation for making predictions using an estimator needs to be
     provided as a function to `get_preds` for `StackingEstimator`; when predictions need to be
     made using an estimator, this class will call `get_preds` for the `StackingEstimator` instance.
+
+    Proper usage of this class requires one important condition to be satisfied: the predictions made
+    using the estimators are determinstic, i.e. they are exactly the same everytime a
+    `StackingEstimator` instance is run with the same inputs.
     """
     estimators = []
     working_dir_path = ""
