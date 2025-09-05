@@ -283,7 +283,7 @@ class StackingPredictionsRetriever:
                 curr_test_preds.drop(columns=col_names_to_remove, inplace=True)
                 curr_test_preds.to_csv(self.get_test_preds_file_path(), index=False)
             else:
-                print(f"[INFO] No columns for training predictions were dropped")
+                print(f"[INFO] No columns for test predictions were dropped")
 
         print("[INFO] Finished syncing predictions")
 
